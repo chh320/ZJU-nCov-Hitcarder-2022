@@ -17,6 +17,12 @@ jobs:
             dingtalk_token: DINGTALK_TOKEN
             pushplus_token: PUSHPLUS_TOKEN
             serverchan_key: SERVERCHAN_KEY
+        include:
+          - username: ZJU_USERNAME_ZXW
+            password: ZJU_PASSWORD_ZXW
+            dingtalk_token: DINGTALK_TOKEN
+            pushplus_token: PUSHPLUS_TOKEN
+            serverchan_key: SERVERCHAN_KEY
     steps:
       - name: Checkout
         uses: actions/checkout@v2
