@@ -155,6 +155,17 @@ class HitCarder(object):
         result_int = pow(password_int, e_int, M_int)
         return hex(result_int)[2:].rjust(128, '0')
 
+    def local_updatetxt(self):
+        res = self.sess.get(self.base_url)
+        html = res.content.decode()
+        try:
+            new_form = re.findall(r'<ul>[\s\S]*?</ul>', html)[0]
+        except IndexError as _:
+            raise RegexMatchError('Relative info not found in html with regex')
+        with open("form.txt", "w", encoding="utf-8") as f:
+             f.write(new_form)
+        return False
+
 
 # Exceptions
 class LoginError(Exception):
@@ -179,8 +190,9 @@ def main(username, password):
         username: (str) 浙大统一认证平台用户名（一般为学号）
         password: (str) 浙大统一认证平台密码
     """
-
     hit_carder = HitCarder(username, password)
+    # hit_carder.local_updatetxt()
+
     print("[Time] %s" % datetime.datetime.now().strftime(
         '%Y-%m-%d %H:%M:%S'))
     print(datetime.datetime.utcnow() + datetime.timedelta(hours=+8))
@@ -218,6 +230,9 @@ def main(username, password):
 
 
 if __name__ == "__main__":
+
+    
+
     username = os.environ['USERNAME']
     password = os.environ['PASSWORD']
 
