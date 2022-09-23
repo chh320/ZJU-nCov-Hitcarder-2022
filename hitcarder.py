@@ -129,19 +129,24 @@ class HitCarder(object):
         ocr = ddddocr.DdddOcr()
         resp = self.sess.get(self.captcha_url)
         # form change
-        new_info['szgjcs'] = ""
-        new_info['zgfx14rfhsj'] = ""
-        new_info['geo_api_info'] = old_info['geo_api_info'] # 定位
-        new_info['address'] = old_info['address']
+        # new_info['szgjcs'] = ""
+        # new_info['zgfx14rfhsj'] = ""
+        # new_info['geo_api_info'] = old_info['geo_api_info'] # 定位
+        # new_info['address'] = old_info['address']
         new_info['area'] = old_info['area']
-        new_info['city'] = old_info['city']
-        new_info['ismoved'] = 0
+        # new_info['city'] = old_info['city']
+        # new_info['ismoved'] = 0
         new_info['sfzx'] = old_info['sfzx'] # 在校
-        new_info['sfymqjczrj'] = old_info['sfymqjczrj'] # 入境
+        # new_info['sfymqjczrj'] = old_info['sfymqjczrj'] # 入境
         new_info['sfqrxxss'] = 1 # 属实
         new_info['campus'] = '紫金港校区' #校区
-        new_info['internship'] = 0 # 实习
+        new_info['internship'] = 1 # 实习
         #new_info['verifyCode'] =  ocr.classification(resp.content)#验证码
+        # add new
+        new_info['sqhzjkkys'] = old_info['sqhzjkkys']
+        new_info['tw'] = old_info['tw']
+        new_info['sfcxzysx'] = old_info['sfcxzysx']
+        new_info['sfjcbh'] = old_info['sfjcbh']
 
         self.info = new_info
         # print(json.dumps(self.info))
@@ -191,6 +196,7 @@ def main(username, password):
         password: (str) 浙大统一认证平台密码
     """
     hit_carder = HitCarder(username, password)
+    # hit_carder.login()
     # hit_carder.local_updatetxt()
 
     print("[Time] %s" % datetime.datetime.now().strftime(
@@ -230,9 +236,6 @@ def main(username, password):
 
 
 if __name__ == "__main__":
-
-    
-
     username = os.environ['USERNAME']
     password = os.environ['PASSWORD']
 
