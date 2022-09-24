@@ -208,31 +208,31 @@ def main(username, password):
         hit_carder.login()
         print('已登录到浙大统一身份认证平台')
     except Exception as err:
-        return 1, '打卡登录失败：' + str(err)
+        return 1, str(username) +'打卡登录失败：' + str(err)
 
     try:
         ret = hit_carder.check_form()
         if not ret:
-            return 2, '打卡信息已改变，请手动打卡'
+            return 2, str(username) +'打卡信息已改变，请手动打卡'
     except Exception as err:
-        return 1, '获取信息失败，请手动打卡: ' + str(err)
+        return 1, str(username) +'获取信息失败，请手动打卡: ' + str(err)
 
     try:
         hit_carder.get_info()
     except Exception as err:
-        return 1, '获取信息失败，请手动打卡: ' + str(err)
+        return 1, str(username) +'获取信息失败，请手动打卡: ' + str(err)
 
     try:
         res = hit_carder.post()
         print(res)
         if str(res['e']) == '0':
-            return 0, '打卡成功'
+            return 0, str(username) + '打卡成功'
         elif str(res['m']) == '今天已经填报了':
-            return 0, '今天已经打卡'
+            return 0, str(username) +'今天已经打卡'
         else:
-            return 1, '打卡失败'
+            return 1, str(username) +'打卡失败'
     except:
-        return 1, '打卡数据提交失败'
+        return 1, str(username) +'打卡数据提交失败'
 
 
 if __name__ == "__main__":
