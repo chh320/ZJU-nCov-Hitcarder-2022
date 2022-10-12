@@ -147,6 +147,7 @@ class HitCarder(object):
         new_info['tw'] = old_info['tw']
         new_info['sfcxzysx'] = old_info['sfcxzysx']
         new_info['sfjcbh'] = old_info['sfjcbh']
+        new_info['sfymqjczrj'] = old_info['sfymqjczrj']
 
         self.info = new_info
         # print(json.dumps(self.info))
@@ -198,7 +199,6 @@ def main(username, password):
     hit_carder = HitCarder(username, password)
     # hit_carder.login()
     # hit_carder.local_updatetxt()
-
     print("[Time] %s" % datetime.datetime.now().strftime(
         '%Y-%m-%d %H:%M:%S'))
     print(datetime.datetime.utcnow() + datetime.timedelta(hours=+8))
@@ -240,6 +240,7 @@ if __name__ == "__main__":
     password = os.environ['PASSWORD']
 
     ret, msg = main(username, password)
+    
     print(ret, msg)
     if ret == 1:
         time.sleep(5)
